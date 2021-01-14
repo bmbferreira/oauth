@@ -53,11 +53,11 @@ func deviceInitURL(host string) string {
 }
 
 func webappInitURL(host string) string {
-	return fmt.Sprintf("https://%s/login/oauth/authorize", host)
+	return fmt.Sprintf("https://%s/oauth2/authorize", host)
 }
 
 func tokenURL(host string) string {
-	return fmt.Sprintf("https://%s/login/oauth/access_token", host)
+	return fmt.Sprintf("https://%s/login/oauth2/token", host)
 }
 
 // DetectFlow tries to perform Device flow first and falls back to Web application flow.
