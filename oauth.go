@@ -57,7 +57,7 @@ func webappInitURL(host string) string {
 }
 
 func tokenURL(host string) string {
-	return fmt.Sprintf("https://%s/login/oauth2/token", host)
+	return fmt.Sprintf("https://%s/oauth2/token", host)
 }
 
 // DetectFlow tries to perform Device flow first and falls back to Web application flow.
