@@ -102,6 +102,9 @@ func (flow *Flow) AccessToken(c httpClient, tokenURL, clientSecret string) (*api
 			"client_secret": {clientSecret},
 			"code":          {code.Code},
 			"state":         {flow.state},
+			"scope":         {"email"},
+			"redirect_uri":  {"http://localhost:3000/callback"},
+			"grant_type":    {"authorization_code"},
 		})
 	if err != nil {
 		return nil, err
