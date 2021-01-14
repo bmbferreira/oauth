@@ -29,7 +29,8 @@ type Flow struct {
 	ClientSecret string
 	// The localhost URI for web application flow callback, e.g. "http://127.0.0.1/callback".
 	CallbackURI string
-
+	// OAuth Response Type. Only applicable in web application flow.
+	ResponseType string
 	// Display a one-time code to the user. Receives the code and the browser URL as arguments. Defaults to printing the
 	// code to the user on Stdout with instructions to copy the code and to press Enter to continue in their browser.
 	DisplayCode func(string, string) error

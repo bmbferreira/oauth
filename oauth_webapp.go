@@ -18,10 +18,11 @@ func (oa *Flow) WebAppFlow() (*api.AccessToken, error) {
 	}
 
 	params := webapp.BrowserParams{
-		ClientID:    oa.ClientID,
-		RedirectURI: oa.CallbackURI,
-		Scopes:      oa.Scopes,
-		AllowSignup: true,
+		ClientID:     oa.ClientID,
+		RedirectURI:  oa.CallbackURI,
+		Scopes:       oa.Scopes,
+		ResponseType: oa.ResponseType,
+		AllowSignup:  true,
 	}
 	browserURL, err := flow.BrowserURL(webappInitURL(oa.Hostname), params)
 	if err != nil {
