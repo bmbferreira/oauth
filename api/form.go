@@ -1,8 +1,8 @@
 package api
 
 import (
+	"encoding/json"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -19,6 +19,14 @@ type FormResponse struct {
 
 	requestURI string
 	values     url.Values
+	tokenData  TokenData
+}
+
+type TokenData struct {
+	access_token  string
+	expires_in    uint64
+	refresh_token string
+	token_type    string
 }
 
 // Get the response value named k.
@@ -83,10 +91,14 @@ func PostForm(c httpClient, u string, params url.Values) (*FormResponse, error) 
 			return r, err
 		}
 	} else {
-		_, err = io.Copy(ioutil.Discard, resp.Body)
-		if err != nil {
-			return r, err
-		}
+		tokenData := new(TokenData)
+		json.NewDecoder(resp.Body).Decode(tokenData)
+		r.tokenData = *tokenData
+		//TODO: remove this
+		println(tokenData.access_token)
+		println(tokenData.expires_in)
+		println(tokenData.refresh_token)
+		println(tokenData.token_type)
 	}
 
 	return r, nil
