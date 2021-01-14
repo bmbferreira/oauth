@@ -15,7 +15,7 @@ type CodeResponse struct {
 
 // bindLocalServer initializes a LocalServer that will listen on a randomly available TCP port.
 func bindLocalServer() (*localServer, error) {
-	listener, err := net.Listen("tcp4", "127.0.0.1:0")
+	listener, err := net.Listen("tcp4", "127.0.0.1:3000")
 	if err != nil {
 		return nil, err
 	}
