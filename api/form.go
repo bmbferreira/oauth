@@ -23,10 +23,10 @@ type FormResponse struct {
 }
 
 type TokenData struct {
-	access_token  string
-	expires_in    uint64
-	refresh_token string
-	token_type    string
+	AccessToken  string `json:"access_token"`
+	RefreshToken string `json:"refresh_token"`
+	ExpiresIn    int    `json:"expires_in"`
+	TokenType    string `json:"token_type"`
 }
 
 // Get the response value named k.
@@ -92,13 +92,16 @@ func PostForm(c httpClient, u string, params url.Values) (*FormResponse, error) 
 		}
 	} else {
 		tokenData := new(TokenData)
-		json.NewDecoder(resp.Body).Decode(tokenData)
+		err = json.NewDecoder(resp.Body).Decode(tokenData)
+		if err != nil {
+			return r, err
+		}
 		r.tokenData = *tokenData
 		//TODO: remove this
-		println(tokenData.access_token)
-		println(tokenData.expires_in)
-		println(tokenData.refresh_token)
-		println(tokenData.token_type)
+		println(tokenData.AccessToken)
+		println(tokenData.ExpiresIn)
+		println(tokenData.RefreshToken)
+		println(tokenData.TokenType)
 	}
 
 	return r, nil
